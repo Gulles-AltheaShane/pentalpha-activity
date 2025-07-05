@@ -7,18 +7,19 @@ app = Flask(__name__)
 
 @app.route('/notes', methods=['GET'])
 def get_notes():
-    return jsonfy (view_notes())
+    return jsonify (view_notes())
 
 @app.route('/notes/<int:notes_id>', methods=['GET', 'DELETE'])
-def delete_note(id):
-    return jsonfy(delete_note())
-    
+def note_detail(notes_id):
+        return jsonify(delete_note(notes_id))
+
 @app.route('/notes/<int:id>/contents', methods=['PUT'])
-def put_note():
-    return jsonfy (update_note())
+def put_note(id):
+    return jsonify(update_note(id, data))
 
-@app.route('/notes/<contents>', methods=['POST'])
+@app.route('/notes', methods=['POST'])
 def post_note():
-    return jsonfy(add_note)
+    return jsonify(add_note(data))
 
-app.run()
+if __name__ == '__main__':
+    app.run()
